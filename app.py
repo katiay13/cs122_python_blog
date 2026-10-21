@@ -32,3 +32,7 @@ if __name__ == "__main__":
         db.create_all() # Creates pythonistas_blog.db and any other tables
     app.run(debug=True) # Will auto reload when changes are saved
 
+# runs when developers tab is visited
+@app.route("/developers")
+def developers():
+    return render_template("developers.html")
