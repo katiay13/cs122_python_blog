@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Make page scale correctly on phones -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+
+    <title>{% block title %}The Pythonistas{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+    <!-- Navigation bar for each page -->
+     <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+
+        <a href="#">Blog</a>
+        <a href="#">Media</a>
+        <a href="#">Collage</a>
+        <a href="#">Interactive</a>
+
+     </nav>
+
+     <!-- Main page for content -->
+     <main>
+        {% block content %}{% endblock %}
+     </main>
+
+     <!-- Footer just to show on every page -->
+      <footer>The Pythonistas</footer>
+</body>
+</html>
