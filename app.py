@@ -37,6 +37,11 @@ def developers():
 def music_reviews():
     return render_template("music_reviews.html")
 
+# runs when 'fashion reviews' tab is visited
+@app.route("/fashion-reviews")
+def fashion_reviews():
+    return render_template("fashion_reviews.html")
+
 
 
 
