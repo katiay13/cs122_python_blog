@@ -41,6 +41,20 @@ def developers():
 def music_reviews():
     return render_template("music_reviews.html")
 
+# runs when 'red velvet' link is visited
+@app.route("/red-velvet")
+def red_velvet():
+    return render_template("red_velvet.html")
+
+# runs when 'enhypen' link is visited
+@app.route("/enhypen")
+def enhypen():
+    return render_template("enhypen.html")
+
+# runs when 'ive' link is visited
+@app.route("/ive")
+def ive():
+    return render_template("ive.html")
 
 # runs when 'fashion reviews' tab is visited
 @app.route("/fashion-reviews")

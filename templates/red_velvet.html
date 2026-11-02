@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Red Velvet Reviews</h1>
+
+<p>Welcome to my Red Velvet album reviews!</p>
+
+<div class="review">
+    <h2>Album Title</h2>
+    <p>Type of Album: Single/Mini/Full/Repackage/Compilation</p>
+    <p>Release Date: [insert here]</p>
+    <p>Review of each song will be put here</p>
+    <p>Rating: ?/10</p>
+</div>
+
+<a href="{{ url_for('music_reviews') }}">Back to Music Reviews</a>
+
+{% endblock %}
