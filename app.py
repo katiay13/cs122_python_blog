@@ -1,6 +1,6 @@
 # Flask is Web framework 
 # Load HTML files from templates/
-from flask import Flask, render_template, session
+from flask import Flask, render_template, session, request, redirect, url_for
 
 import json
 import os
@@ -49,14 +49,23 @@ def fashion_reviews():
 
 
 # runs when someone visits /mysterious-castle
-@app.route("/mysterious-castle")
+# route accepts form submissions
+@app.route("/mysterious-castle", methods=["GET", "POST"])
 def play():
     scene_id = session.get("scene", "castle_exterior")  # grabs scene id, default: castle_exterior
     path = os.path.join(app.root_path, "interactive", "scenes.json")    # full path to json file
     with open(path, encoding="utf-8") as f:
         scenes = json.load(f)   # store json text as python dict
     scene = scenes[scene_id]    # grabs scene's data (name, dialogue, hotspots)
-    return scene["dialogue"]    # send scene's dialogue to browser
+
+    if request.method == "POST":                    # did player click something
+        clicked_id = request.form.get("hotspot")    # reads which button was clicked
+        for hotspot in scene["hotspots"]:           # look through this room's hotspots
+            if hotspot["id"] == clicked_id and hotspot["type"] == "exit":   # check if hotspot is exit
+                session["scene"] = hotspot["target"]    # move to new room
+        return redirect(url_for("play"))            # send browser back to /mysterious-castle with new room loaded
+
+    return render_template("castle.html", scene=scene)
 
 
 # NEEDS to stay at BOTTOM of file
