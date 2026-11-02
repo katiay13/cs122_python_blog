@@ -41,6 +41,13 @@ def developers():
 def music_reviews():
     return render_template("music_reviews.html")
 
+
+# runs when 'fashion reviews' tab is visited
+@app.route("/fashion-reviews")
+def fashion_reviews():
+    return render_template("fashion_reviews.html")
+
+
 # runs when someone visits /mysterious-castle
 # route accepts form submissions
 @app.route("/mysterious-castle", methods=["GET", "POST"])
@@ -59,6 +66,7 @@ def play():
         return redirect(url_for("play"))            # send browser back to /mysterious-castle with new room loaded
 
     return render_template("castle.html", scene=scene)
+
 
 # NEEDS to stay at BOTTOM of file
 # Runs when file is started with "python app.py"
