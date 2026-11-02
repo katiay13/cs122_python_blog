@@ -26,12 +26,10 @@ class BlogPost(db.Model):
     title = db.Column(db.String(100), nullable=False)
     body = db.Column(db.Text, nullable=False)
 
-
 # Runs when homepage is visited
 @app.route("/")
 def index():
     return render_template("index.html")
-
 
 # runs when developers tab is visited
 @app.route("/developers")
@@ -53,7 +51,7 @@ def play():
     scene = scenes[scene_id]    # grabs scene's data (name, dialogue, hotspots)
     return scene["dialogue"]    # send scene's dialogue to browser
 
-
+# NEEDS to stay at BOTTOM of file
 # Runs when file is started with "python app.py"
 if __name__ == "__main__":
     with app.app_context(): # Need app context for database commands
