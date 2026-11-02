@@ -26,11 +26,6 @@ class BlogPost(db.Model):
 def index():
     return render_template("index.html")
 
-# Runs when file is started with "python app.py"
-if __name__ == "__main__":
-    with app.app_context(): # Need app context for database commands
-        db.create_all() # Creates pythonistas_blog.db and any other tables
-    app.run(debug=True) # Will auto reload when changes are saved
 
 # runs when 'developers' tab is visited
 @app.route("/developers")
@@ -41,3 +36,14 @@ def developers():
 @app.route("/music-reviews")
 def music_reviews():
     return render_template("music_reviews.html")
+
+
+
+
+
+# NEEDS to stay at BOTTOM of file
+# Runs when file is started with "python app.py"
+if __name__ == "__main__":
+    with app.app_context(): # Need app context for database commands
+        db.create_all() # Creates pythonistas_blog.db and any other tables
+    app.run(debug=True) # Will auto reload when changes are saved
