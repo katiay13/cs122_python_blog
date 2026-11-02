@@ -41,6 +41,13 @@ def developers():
 def music_reviews():
     return render_template("music_reviews.html")
 
+
+# runs when 'fashion reviews' tab is visited
+@app.route("/fashion-reviews")
+def fashion_reviews():
+    return render_template("fashion_reviews.html")
+
+
 # runs when someone visits /mysterious-castle
 @app.route("/mysterious-castle")
 def play():
@@ -50,6 +57,7 @@ def play():
         scenes = json.load(f)   # store json text as python dict
     scene = scenes[scene_id]    # grabs scene's data (name, dialogue, hotspots)
     return scene["dialogue"]    # send scene's dialogue to browser
+
 
 # NEEDS to stay at BOTTOM of file
 # Runs when file is started with "python app.py"

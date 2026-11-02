@@ -1,0 +1,50 @@
+{# Use layout from base.html and fill in blocks #}
+{% extends "base.html" %}
+
+{# Set browser tab title #}
+{% block title %}Fashion Reviews{% endblock %}
+
+{% block content %}
+<h1>Fashion Reviews</h1>
+
+<p>My take on fashion pieces, styles, and trends throughout the years!</p>
+
+{# Section 1: fashion trends #}
+<h2>* Fashion Trend Reviews *</h2>
+
+<div class="review">
+    <h3>Trend Name</h3>
+    <p>Era/Season: e.g. Y2K, Fall 2026</p>
+    <p>
+        Thoughts on trends will go here
+    </p>
+    <p>Personal Verdict: Love it / Like it / It depends / Don't like it</p>
+    <p>Rating: ?/5</p>
+</div>
+
+
+{# Section 2: individual pieces #}
+<h2>* Individual Pieces Reviews *</h2>
+
+<div class="review">
+    <h3>Item Name</h3>
+    <p>Brand: Brand Name</p>
+    <p>Category: Shoes</p>
+    <p>
+        Reviews of the pieces go here (fit, quality, price, look of it)
+    </p>
+    <p>Rating: ?/5</p>
+</div>
+
+
+{# Section 3: favorites #}
+<h2>* My favorites *</h2>
+
+<div class="favorite">
+    <h3>Favorite Pieces or Styles</h3>
+    <p>
+        Explanations of my favorites goes here
+    </p>
+</div>
+
+{% endblock %}
