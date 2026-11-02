@@ -5,11 +5,11 @@
     </head>
     <body>
         <h1>{{ scene.name }}</h1>
-
-        {% for hotspot in scene.hotspots %}
-            <button>{{ hotspot.label }}</button>
-        {% endfor %}
-
+            <form method="post">    {# clicking on button sends a POST to the URL the page is on #}
+                {% for hotspot in scene.hotspots %}
+                    <button name="hotspot" value="{{ hotspot.id }}">{{ hotspot.label }}</button>
+                {% endfor %}
+            </form>
         <div class="dialogue">{{ scene.dialogue }}</div>
     </body>
 </html>
