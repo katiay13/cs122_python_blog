@@ -1,0 +1,38 @@
+{
+    "castle_exterior": {
+        "name": "Beyond the castle",
+        "dialogue": "I wonder if anyone's home...",
+        "hotspots": [
+            {"id": "castle_doors", "type": "exit", 
+            "label": "Castle Doors", "target": "entrance_hall"}
+        ]
+    },
+
+    "entrance_hall": {
+        "name": "Entrance Hall",
+        "dialogue": "Where's the guards?",
+        "hotspots": [
+            {"id": "kitchen_door", "type": "exit", "label": "Door to Kitchen", "target": "kitchen"},
+            {"id": "stairs", "type": "exit", "label": "Up the stairs", "target": "upstairs"},
+            {"id": "library_door", "type": "exit", "label": "Door to Library", "target": "library"}
+        ]
+    },
+
+    "kitchen": {
+        "name": "Kitchen",
+        "dialogue": "TODO: kitchen entrance thought",
+        "hotspots": [{"id": "back_to_hall", "type": "exit", "label": "Back to hall", "target": "entrance_hall"}]
+    },
+
+    "upstairs": {
+        "name": "Upstairs",
+        "dialogue": "TODO: upstairs entrance thought",
+        "hotspots": [{"id": "back_to_hall", "type": "exit", "label": "Back to hall", "target": "entrance_hall"}]
+    },
+
+    "library": {
+        "name": "Library",
+        "dialogue": "TODO: library entrance thought",
+        "hotspots": [{"id": "back_to_hall", "type": "exit", "label": "Back to hall", "target": "entrance_hall"}]
+    }
+}
