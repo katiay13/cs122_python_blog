@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ scene.name }}</title>
+    </head>
+    <body>
+        <h1>{{ scene.name }}</h1>
+
+        {% for hotspot in scene.hotspots %}
+            <button>{{ hotspot.label }}</button>
+        {% endfor %}
+
+        <div class="dialogue">{{ scene.dialogue }}</div>
+    </body>
+</html>

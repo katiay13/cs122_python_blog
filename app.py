@@ -49,7 +49,7 @@ def play():
     with open(path, encoding="utf-8") as f:
         scenes = json.load(f)   # store json text as python dict
     scene = scenes[scene_id]    # grabs scene's data (name, dialogue, hotspots)
-    return scene["dialogue"]    # send scene's dialogue to browser
+    return render_template("castle.html", scene=scene)
 
 # NEEDS to stay at BOTTOM of file
 # Runs when file is started with "python app.py"
