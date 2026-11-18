@@ -2,9 +2,9 @@
     "castle_exterior": {
         "name": "Beyond the castle",
         "dialogue": "I wonder if anyone's home...",
+        "image": "castle/castle_exterior.jpg",
         "hotspots": [
-            {"id": "castle_doors", "type": "exit", 
-            "label": "Castle Doors", "target": "entrance_hall"}
+            {"id": "castle_doors", "type": "exit", "label": "Castle Doors", "target": "entrance_hall"}
         ]
     },
 
@@ -14,25 +14,112 @@
         "hotspots": [
             {"id": "kitchen_door", "type": "exit", "label": "Door to Kitchen", "target": "kitchen"},
             {"id": "stairs", "type": "exit", "label": "Up the stairs", "target": "upstairs"},
-            {"id": "library_door", "type": "exit", "label": "Door to Library", "target": "library"}
+            {"id": "library_door", "type": "exit", "label": "Door to Library", "target": "library", 
+            "requires": "library_key", "not_yet_text": "It's locked..."}
         ]
     },
 
     "kitchen": {
         "name": "Kitchen",
-        "dialogue": "TODO: kitchen entrance thought",
-        "hotspots": [{"id": "back_to_hall", "type": "exit", "label": "Back to hall", "target": "entrance_hall"}]
+        "dialogue": "Smells like something was baking... a long time ago.",
+        "hotspots": [
+            {"id": "pot", "type": "look", "label": "Pot", "text": "The soup's gone cold."},
+            {"id": "outside_door", "type": "exit", "label": "Door to Outside", "target": "garden"},
+            {"id": "kitchen_door", "type": "exit", "label": "Kitchen Door", "target": "entrance_hall"}
+        ]
     },
 
     "upstairs": {
         "name": "Upstairs",
-        "dialogue": "TODO: upstairs entrance thought",
-        "hotspots": [{"id": "back_to_hall", "type": "exit", "label": "Back to hall", "target": "entrance_hall"}]
+        "dialogue": "Looks like there's more to explore.",
+        "hotspots": [
+            {"id": "princess_room_door", "type": "exit", "label": "Princess's Room Door", "target": "princess_room"},
+            {"id": "throne_room_door", "type": "exit", "label": "Throne Room Door", "target": "throne_room"},
+            {"id": "downstairs", "type": "exit", "label": "Down the stairs", "target": "entrance_hall"}
+        ]
     },
 
     "library": {
         "name": "Library",
-        "dialogue": "TODO: library entrance thought",
-        "hotspots": [{"id": "back_to_hall", "type": "exit", "label": "Back to hall", "target": "entrance_hall"}]
+        "dialogue": "... A library?",
+        "hotspots": [
+            {"id": "library_door", "type": "exit", "label": "Library Door", "target": "entrance_hall"},
+            {"id": "book_pile", "type": "look", "label": "Book Pile", "text": "I guess the princess does a lot of reading."},
+            {"id": "mystery_book", "type": "look", "label": "Mysterious Book", "gives": "read_recipe", 
+            "text": "What was she reading...", "done_text": "I already have the recipe instructions."}
+        ]
+    },
+
+    "garden": {
+        "name": "Garden",
+        "dialogue": "I guess nature's the only thing surviving without these people.",
+        "alt_dialogue": {
+            "requires": ["whisker", "jewel", "bell"],
+            "text": "Was that always there?"
+        },
+        "hotspots": [
+            {"id": "cat", "type": "look", "label": "Cat", "requires": "read_recipe", "gives": "whisker", 
+            "not_yet_text": "Even the cat's in REM?", "text": "Sorry kitty...", "done_text": "That would just be mean."},
+            {"id": "whisker", "type": "collect", "label": "Whisker", "requires": "read_recipe"},
+            {"id": "witch_den", "type": "exit", "label": "Witch's Den", "requires": ["whisker", "jewel", "bell"], "hidden": true},
+            {"id": "kitchen_door", "type": "exit", "label": "Kitchen Door", "target": "kitchen"}
+        ]
+    },
+
+    "princess_room": {
+        "name": "Princess' Room",
+        "dialogue": "I think her favorite color's pink.",
+        "hotspots": [
+            {"id": "crown", "type": "look", "label": "Crown", "requires": "read_recipe", "gives": "jewel", 
+            "not_yet_text": "I'm not a thief, I'm not a thief...", "text": "That'll do...", 
+            "done_text": "I said I'm not a thief!"},
+            {"id": "vanity", "type": "look", "label": "Vanity", "gives": "library_key", 
+            "text": "It's not an invasion of privacy if I'm looking for clues...", "done_text": "Just ribbons left."},
+            {"id": "princess_room_door", "type": "exit", "label": "Door", "target": "upstairs"}
+        ]
+    },
+
+    "throne_room": {
+        "name": "Throne Room",
+        "dialogue": "I thought the throne would be bigger...",
+        "hotspots": [
+            {"id": "king", "type": "look", "label": "King", "text": "Not so powerful now, I guess."},
+            {"id": "jester", "type": "look", "label": "Jester", "requires": "read_recipe", 
+            "gives": "bell", "not_yet_text": "I wonder how much he gets paid to dress like this.", 
+            "text": "Of course, his hat!", "done_text": "I don't need another."},
+            {"id": "throne_room_door", "type": "exit", "label": "Throne Room Door", "target": "upstairs"}
+        ]
+    },
+
+    "witch_den": {
+        "name": "Witch's Den",
+        "dialogue": "I better hurry before the witch gets back!",
+        "hotspots": [
+            {"id": "crystal_ball", "type": "look", "label": "Crystal Ball", "text": "I wonder what it would show me- Focus!"},
+            {"id": "add_whisker", "type": "look", "label": "Add Whisker",
+             "gives": "whisker_in_pot", "hide_when_done": true},
+            {"id": "add_jewel", "type": "look", "label": "Add Jewel",
+             "gives": "jewel_in_pot", "hide_when_done": true},
+            {"id": "add_bell", "type": "look", "label": "Add Bell",
+             "gives": "bell_in_pot", "hide_when_done": true},
+            {"id": "cauldron", "type": "exit", "label": "Cauldron", "target": "brew",
+             "requires": ["whisker_in_pot", "jewel_in_pot", "bell_in_pot"],
+             "not_yet_text": "That must be where I make the brew! It still needs ingredients."}
+        ]
+    },
+
+    "brew": {
+        "name": "Witch's Brew",
+        "dialogue": "I put in all three ingredients, and then...",
+        "hotspots": [
+            {"id": "continue", "type": "exit", "label": "Continue", "target": "ending"}
+        ]
+    },
+
+    "ending": {
+        "name": "A Royal Thank You",
+        "dialogue": "The king woke up and gave me a medallion and a pot of treasure.",
+        "is_ending": true,
+        "hotspots": []
     }
 }

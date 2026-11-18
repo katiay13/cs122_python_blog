@@ -47,6 +47,16 @@ def music_reviews():
 def fashion_reviews():
     return render_template("fashion_reviews.html")
 
+# decides if player has everything the hotspot requires
+def has_all(flags, requires):
+    if requires is None:        # no requirement
+        return True             # always allowed
+    if isinstance(requires, str):  # if req is str, wrap in list 
+        requires = [requires]
+    for flag in requires:       # for every required flag
+        if flag not in flags:   # check if a requirement is missing
+            return False
+    return True
 
 # runs when someone visits /mysterious-castle
 # route accepts form submissions
@@ -58,15 +68,41 @@ def play():
         scenes = json.load(f)   # store json text as python dict
     scene = scenes[scene_id]    # grabs scene's data (name, dialogue, hotspots)
 
-    if request.method == "POST":                    # did player click something
-        clicked_id = request.form.get("hotspot")    # reads which button was clicked
-        for hotspot in scene["hotspots"]:           # look through this room's hotspots
-            if hotspot["id"] == clicked_id and hotspot["type"] == "exit":   # check if hotspot is exit
-                session["scene"] = hotspot["target"]    # move to new room
-        return redirect(url_for("play"))            # send browser back to /mysterious-castle with new room loaded
+    if request.method == "POST":
+        clicked_id = request.form.get("hotspot")
+        flags = session.get("flags", [])
+        message = None
 
-    return render_template("castle.html", scene=scene)
+        for hotspot in scene["hotspots"]:
+            if hotspot["id"] == clicked_id:
+                requires = hotspot.get("requires")
+                gives = hotspot.get("gives")
 
+                if gives and gives in flags:
+                    message = hotspot.get("done_text")
+                elif not has_all(flags, requires):
+                    message = hotspot.get("not_yet_text")
+                else:
+                    if gives:
+                        flags.append(gives)
+                    if hotspot["type"] == "exit":
+                        session["scene"] = hotspot["target"]
+                    message = hotspot.get("text")
+        
+        if message:
+            session["look_text"] = message
+        session["flags"] = flags
+        return redirect(url_for("play"))
+
+    dialogue = session.pop("look_text", scene["dialogue"])
+    return render_template("castle.html", scene=scene, dialogue=dialogue)
+
+@app.route("/mysterious-castle/restart")
+def restart():
+    session.pop("scene", None)
+    session.pop("look_text", None)
+    session.pop("flags", None)
+    return redirect(url_for("play"))
 
 # NEEDS to stay at BOTTOM of file
 # Runs when file is started with "python app.py"

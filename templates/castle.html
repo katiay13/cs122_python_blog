@@ -5,11 +5,14 @@
     </head>
     <body>
         <h1>{{ scene.name }}</h1>
+        {% if scene.image %}
+            <img src="{{ url_for('static', filename=scene.image) }}" alt="{{ scene.name }}" style="width: 100%; max-width: 900px;">
+        {% endif %}
             <form method="post">    {# clicking on button sends a POST to the URL the page is on #}
                 {% for hotspot in scene.hotspots %}
                     <button name="hotspot" value="{{ hotspot.id }}">{{ hotspot.label }}</button>
                 {% endfor %}
             </form>
-        <div class="dialogue">{{ scene.dialogue }}</div>
+        <div class="dialogue">{{ dialogue }}</div>
     </body>
 </html>
